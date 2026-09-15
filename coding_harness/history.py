@@ -23,7 +23,7 @@ SPILLS = []
 def spill(text):
     """Park the full output on disk for the rest of this turn."""
     handle = tempfile.NamedTemporaryFile(
-        mode="w", prefix="simple-harness-", suffix=".txt", delete=False
+        mode="w", prefix="coding-harness-", suffix=".txt", delete=False
     )
     handle.write(text)
     handle.close()

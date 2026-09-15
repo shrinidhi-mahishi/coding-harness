@@ -26,7 +26,7 @@ PROFILE = f"""(version 1)
 def wrap(command):
     """Wrap a shell command in an OS sandbox. None means we have no sandbox."""
     if sys.platform == "darwin":
-        profile = Path(tempfile.gettempdir()) / "simple-harness.sb"
+        profile = Path(tempfile.gettempdir()) / "coding-harness.sb"
         profile.write_text(PROFILE)
         return ["sandbox-exec", "-f", str(profile), "/bin/sh", "-c", command]
 

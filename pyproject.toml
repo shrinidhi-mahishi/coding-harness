@@ -1,5 +1,5 @@
 [project]
-name = "simple-harness"
+name = "coding-harness"
 version = "0.1.0"
 description = "A minimal coding agent harness — the runtime layer that turns an LLM into a working agent"
 readme = "README.md"
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-simple-harness = "simple_harness.agent:main"
+coding-harness = "coding_harness.agent:main"
 
 [build-system]
 requires = ["hatchling"]

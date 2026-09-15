@@ -1,4 +1,4 @@
-# simple-harness
+# coding-harness
 
 A minimal coding agent harness built from scratch in Python.
 
@@ -27,8 +27,8 @@ The **harness** is the runtime layer around an LLM that turns it into a working 
 
 ```bash
 # Clone
-git clone https://github.com/shrinidhi-mahishi/simple-harness.git
-cd simple-harness
+git clone https://github.com/shrinidhi-mahishi/coding-harness.git
+cd coding-harness
 
 # Install
 pip install -e .
@@ -42,7 +42,7 @@ MODEL=deepseek/deepseek-v4-flash
 EOF
 
 # Run
-simple-harness
+coding-harness
 ```
 
 ## How it works

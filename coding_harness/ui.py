@@ -17,7 +17,7 @@ class UI:
     def banner(self, sandbox_name):
         self.console.print(
             Panel(
-                f"[bold green]simple-harness[/] — a minimal coding agent\n"
+                f"[bold green]coding-harness[/] — a minimal coding agent\n"
                 f"sandbox: [cyan]{sandbox_name}[/]  •  ctrl-d to quit",
                 border_style="dim",
             )
