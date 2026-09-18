@@ -1,8 +1,20 @@
 # coding-harness
 
-A minimal coding agent harness built from scratch in Python.
+A ~600-line Python runtime that turns an LLM into a coding agent. No frameworks.
 
-The **harness** is the runtime layer around an LLM that turns it into a working agent — tools, execution, safety, memory, and orchestration.
+The model only reads text and writes text. This repo is everything else: the loop, tools, permissions, OS sandbox, context management, skills, todos, sessions, and subagents.
+
+![A coding-harness session: a failing test, a file edit, then pytest passing](assets/demo.gif)
+
+<p align="center"><sub>Walkthrough of the loop from Part 1. Clone and run <code>coding-harness</code> for the live thing.</sub></p>
+
+## Read the series
+
+A 3-part walkthrough of this code, with the actual snippets:
+
+1. **[The Core](https://ai-brewery.medium.com/harness-engineering-build-the-runtime-that-turns-an-llm-into-an-agent-part-1-3-eb5e2db28be1)** — agent loop, tools, permissions
+2. **[The Safety Net](https://ai-brewery.medium.com/harness-engineering-build-the-runtime-that-turns-an-llm-into-an-agent-part-2-3-f81ea8101fd8)** — sandbox and context engineering
+3. **[The Memory](https://ai-brewery.medium.com/harness-engineering-build-the-runtime-that-turns-an-llm-into-an-agent-part-3-3-d61f23b91998)** — skills, todos, sessions, subagents
 
 ## What's inside
 
@@ -26,22 +38,22 @@ The **harness** is the runtime layer around an LLM that turns it into a working 
 ## Quick start
 
 ```bash
-# Clone
 git clone https://github.com/shrinidhi-mahishi/coding-harness.git
 cd coding-harness
-
-# Install
 pip install -e .
+```
 
-# Configure (any OpenAI-compatible endpoint works)
-mkdir -p ~/.agents
-cat > ~/.agents/env << 'EOF'
+Any OpenAI-compatible API works (OpenRouter, a local server, OpenAI itself). Create `~/.agents/env`:
+
+```
 BASE_URL=https://openrouter.ai/api/v1
 API_KEY=sk-or-...
 MODEL=deepseek/deepseek-v4-flash
-EOF
+```
 
-# Run
+Real environment variables win over that file. Then:
+
+```bash
 coding-harness
 ```
 
@@ -49,7 +61,7 @@ coding-harness
 
 1. **Agent loop** — a `while True` loop where the LLM calls tools, results are fed back, and it repeats until it has nothing left to do.
 
-2. **Tools** — structured actions (bash, file I/O, str_replace, skills, todos, subagents) defined as JSON schemas and dispatched defensively.
+2. **Tools** — structured actions (bash, file I/O, str_replace, skills, todos, subagents) defined as JSON schemas and dispatched defensively. A bad tool call returns an error string instead of crashing the session.
 
 3. **Permissions** — every bash command is split on `&&`, `||`, `;` and each part is matched against glob rules. The strictest verdict wins.
 
